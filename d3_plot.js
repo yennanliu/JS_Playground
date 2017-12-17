@@ -26,7 +26,15 @@ return d.name + ": " + d.status;
 }
 
 
+// d3 pre-process 
 //----------------------------------
+
+
+d3.json("<your_json_file>", function(data) {
+  console.log(data);	
+  console.table(data);
+});
+
 
 
 
