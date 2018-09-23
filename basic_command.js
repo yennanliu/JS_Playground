@@ -21,14 +21,32 @@ console.log(numOfSlices)
 
 
 
-// 2) Create a Variable: declare a new variable, will be "undefined", if no give value to variable
+// 2) Create a Variable let : declare a new variable, will be "undefined", if no give value to variable
 
 let favoriteFood2
 let numOfSlices2
 console.log(favoriteFood2)
 console.log(numOfSlices2)
+favoriteFood2='coke'
+console.log(favoriteFood2)
 
 
+
+// 3) Create a Variable const :
+
+/*
+
+However, a const variable cannot be reassigned because it is constant. If you try to reassign a const variable, you'll get a TypeError.
+Constant variables must be assigned a value when declared. If you try to declare a const variable without a value, you'll get a SyntaxError.
+If you're trying to decide between which keyword to use, let or const, think about whether you'll need to reassign the variable later on. If you do need to reassign the variable use let, otherwise, use const.
+
+*/
+
+
+const entree='Enchiladas'
+console.log(entree)
+//entree = 'Tacos'
+const testing;
 
 
 
