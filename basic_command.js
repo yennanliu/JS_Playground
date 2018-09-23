@@ -1,10 +1,36 @@
 // BASIC COMMANDS JS 
 
 
+
+
 //----------------------------
 // print sth  
 
 console.log(32442)
+
+
+//----------------------------
+// declare variable 
+
+// 1) Create a Variable: var :  declare a new variable.
+
+var favoriteFood='pizza'
+var numOfSlices=8
+console.log(favoriteFood)
+console.log(numOfSlices)
+
+
+
+// 2) Create a Variable: declare a new variable, will be "undefined", if no give value to variable
+
+let favoriteFood2
+let numOfSlices2
+console.log(favoriteFood2)
+console.log(numOfSlices2)
+
+
+
+
 
 //----------------------------
 // import library 
@@ -130,6 +156,9 @@ fruits.length;
 var x = {'a':1,'b':2}
 Object.keys(x).length
 
+
+
+//----------------------------
 
 
 
