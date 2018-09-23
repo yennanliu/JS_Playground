@@ -1,13 +1,16 @@
+// BASIC COMMANDS JS 
+
 
 //----------------------------
 // print sth  
 
-//console.log(32442)
+console.log(32442)
 
 //----------------------------
 // import library 
 
 var http = require('http');
+
 
 //----------------------------
 // return current date 
@@ -92,6 +95,7 @@ console.log("uid:", jsonContent.uid);
 console.log("\n *EXIT* \n");
 
 
+//----------------------------
 // read built-in global JSON  
 
 var exjson = {'key':'...abc...', 'key2':'...xyz...'};
@@ -100,13 +104,31 @@ for(var exKey in exjson) {
 }
 
 
+//----------------------------
+// remove space 
+console.log('    Remove whitespace   '.trim());
+
+
+//----------------------------
+// current time 
+var d = new Date()
+d 
+d.getHours();
+d.getMinutes();
+d.getSeconds();
 
 
 
+//----------------------------
+// list length 
+var fruits = ["Banana", "Orange", "Apple", "Mango"];
+fruits.length;
 
-
-
-
+//----------------------------
+// dict  length 
+// Object.keys(map.data.b.b).length
+var x = {'a':1,'b':2}
+Object.keys(x).length
 
 
 
