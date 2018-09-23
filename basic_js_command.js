@@ -30,6 +30,12 @@ console.log(numOfSlices2)
 favoriteFood2='coke'
 console.log(favoriteFood2)
 
+// or 
+
+let favoriteFood3 = 'juice'
+let numOfSlices3 = '3'
+console.log(favoriteFood3)
+console.log(numOfSlices3)
 
 
 // 3) Create a Variable const :
@@ -47,6 +53,16 @@ const entree='Enchiladas'
 console.log(entree)
 //entree = 'Tacos'
 const testing;
+
+
+//----------------------------
+// print typeof object 
+let newVariable = 'Playing around with typeof.';
+console.log(typeof  newVariable)
+let newNumber = 7 
+console.log(typeof  newNumber)
+
+
 
 
 
