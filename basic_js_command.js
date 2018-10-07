@@ -66,7 +66,7 @@ console.log(typeof  newNumber)
 
 
 //----------------------------
-// if , else if, else if, else 
+// if, else if, else if, else 
 let stopLight = 'yellow';
 
 if (stopLight === 'red') {
@@ -78,6 +78,29 @@ if (stopLight === 'red') {
 } else {
   console.log('Caution, unknown!');
 }
+
+
+
+//----------------------------
+// switch example  (different way doing if, else if, else if, else  )
+
+let athleteFinalPosition = 'first place';
+
+switch(athleteFinalPosition){
+  case 'first place':
+    console.log('You get the gold medal!');
+    break;
+  case 'second place':
+    console.log('You get the silver medal!');
+    break;
+  case 'third place':
+    console.log('You get the bronze medal!');
+    break;
+  default:
+    console.log('No medal awarded.');
+    break;
+}
+
 
 
 
