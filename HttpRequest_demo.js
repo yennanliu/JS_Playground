@@ -25,8 +25,36 @@ request.send();
 
 
 // ---------------------------------------------
-// demo 2  
+// demo 2 
+// https://jsonplaceholder.typicode.com/
+ 
 
 
+
+var request = new XMLHttpRequest();
+
+request.open('GET', 'https://jsonplaceholder.typicode.com/posts', true);
+request.onload = function () {
+
+  // Begin accessing JSON data here
+  var data = JSON.parse(this.response);
+
+  if (request.status >= 200 && request.status < 400) {
+  	console.log(data) 
+  	data.forEach(x => 
+  	{	console.log('id : ' +  x.id); 
+  		console.log('title : ' +  x.title); 
+  	});
+
+  } else {
+    console.log('error');
+  }
+}
+
+request.send();
+
+
+// ---------------------------------------------
+// demo 3 
 
 
