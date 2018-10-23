@@ -2,9 +2,8 @@
 
 
 
-CRUD methods | details 
+CRUD methods | HTTP Method	Definition 
 ------------ | -------------
-Action	|  HTTP Method	Definition
 Create	|  POST	Creates a new resource
 Read	|  GET Retrieves a resource
 Update	|  PUT/PATCH Updates an existing resource
