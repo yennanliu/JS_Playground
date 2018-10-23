@@ -1,6 +1,16 @@
 ## utility_JS
 
 
+
+CRUD methods | details 
+------------ | -------------
+Action	|  HTTP Method	Definition
+Create	|  POST	Creates a new resource
+Read	|  GET Retrieves a resource
+Update	|  PUT/PATCH Updates an existing resource
+Delete	|  DELETE Deletes a resource
+
+
 ### run JS script via Node.js 
 
 ```Bash
@@ -16,3 +26,10 @@ node example.js
 #dev 
 
 ```
+
+### Ref 
+- HTTP API JSONPlaceholder
+	- https://jsonplaceholder.typicode.com/
+- HTTP API tutorial
+	- https://www.taniarascia.com/how-to-connect-to-an-api-with-javascript/
+
