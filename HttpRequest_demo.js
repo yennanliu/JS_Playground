@@ -1,7 +1,16 @@
 
 
+
+// ****************************************** //
+
+// HTTP GET 
+
+// ****************************************** //
+
+
+
 // ---------------------------------------------
-// demo 1 
+// http GET demo 1   
 // https://www.taniarascia.com/how-to-connect-to-an-api-with-javascript/
 
 var request = new XMLHttpRequest();
@@ -25,11 +34,8 @@ request.send();
 
 
 // ---------------------------------------------
-// demo 2 
+// http GET  demo 2 
 // https://jsonplaceholder.typicode.com/
- 
-
-
 
 var request = new XMLHttpRequest();
 
@@ -54,7 +60,55 @@ request.onload = function () {
 request.send();
 
 
+
+// ****************************************** //
+
+// HTTP POST 
+
+// ****************************************** //
+
+
 // ---------------------------------------------
-// demo 3 
+// POST demo 1 
+// https://github.com/typicode/jsonplaceholder#how-to
+// POST adds a random id to the object sent
+
+fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify({
+      title: 'foo',
+      body: 'bar',
+      userId: 1
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  .then(response => response.json())
+  .then(json => console.log(json))
+
+
+
+
+
+// ****************************************** //
+
+// HTTP PUT/PATCH  
+
+// ****************************************** //
+
+
+
+
+// ****************************************** //
+
+// HTTP DELETE 
+
+// ****************************************** //
+
+
+
+
+
 
 
