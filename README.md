@@ -33,6 +33,10 @@ node example.js
 	- https://www.taniarascia.com/how-to-connect-to-an-api-with-javascript/
 - Command-line JSON processing tool
 	- https://github.com/antonmedv/fx
+
+### Course 
+- javascript-basics-for-beginners
+	- https://www.udemy.com/javascript-basics-for-beginners/
 	
 
 
