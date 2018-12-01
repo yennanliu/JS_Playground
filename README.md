@@ -13,7 +13,7 @@ Delete	|  DELETE Deletes a resource
 ### run JS script via Node.js 
 
 ```Bash
-node example.js 
+node basic.js 
 
 ```
 
