@@ -13,6 +13,16 @@ function sqaure(number){
 	return number*number 
 }
 
+// define func 4  : if else 
+function is_big(number){
+	if (number > 10){
+		console.log('this is a big number :  ' + number )
+	}
+	else{
+		console.log('this is a small number :  ' + number )
+	}
+}
+
 
 // call the func 
 greet('Lin');
@@ -20,6 +30,13 @@ greet_full('Jeremy', 'Lin');
 // 2 ways to get the func return value 
 let x = sqaure(5); 
 console.log(sqaure(5)); 
+// call the 4 func 
+is_big(100);
+is_big(2);
+
+
+
+
 
 
 
