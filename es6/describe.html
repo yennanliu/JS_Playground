@@ -10,6 +10,36 @@
 
     <script>
         // https://youtu.be/sAhGSS_PNTo?t=14
+
+        // 1) ---------------------------- array desconstruct
+        let arr = [1,2,3];
+        let a = arr[0];
+        let b = arr[1];
+        let c = arr[2];
+        console.log(a,b,c);
+
+        // or, can do below (ES6) : array desconstruct
+        let [d,e,f] = arr;
+        console.log(d,e,f);
+
+        // 2) ---------------------------- object desconstruct
+        const person = {
+            name: "mary",
+            age: 19,
+            language: ["java", "scala", "c"]
+        }
+        const name = person.name;
+        const age = person.age;
+        const language = person.language;
+        console.log(name, age, language);
+
+        // or, can do below (ES6) : object desconstruct
+        const{name2, age2, language2} = person;
+        console.log(name2, age2, language2);
+        
+
+
+
     </script>
     
 </body>
