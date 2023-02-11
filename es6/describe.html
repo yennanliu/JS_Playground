@@ -63,8 +63,16 @@
         let age4 = 22;
         let info4 = "I am ${name4}, ${age4} years old";
         let info4_1 = `I am ${name4}, ${age4} years old`; // notice `` herew
+        let info4_2 = `I am ${name4}, ${age4+100} years old`;
+        let info4_3 = `${func1()}`; // note : we call func via funct1()
         console.log(info4);
         console.log(info4_1);
+        console.log(info4_2);
+        console.log(info4_3);
+
+        function func1(){
+            return "this is func1";
+        }
 
     </script>
     
