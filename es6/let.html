@@ -9,8 +9,12 @@
 <body>
 
     <script>
+        // https://youtu.be/-qdpYvJ9_xM?t=185
+
+        // 1) ----------------------------
         // var : var can be used acorss area
-        // let : var ONLY can be used in defined area
+        // let : var ONLY can be used in defined area (only in the code block for example)
+        // {} : is a code block, let x = 123; can ONLY be used inside
         {
         var a = 1;
         let b = 2;
@@ -19,7 +23,17 @@
         }
 
         console.log(a); // 1
-        console.log(b); 
+        console.log(b); // referenceError, b is not found
+
+        // 2) ----------------------------
+        // var can be declared multuple times
+        // let can ONLY be declared once
+        var m = 1;
+        var m = 2;
+        let n = 3;
+        // let n = 4;
+        console.log(m);
+        console.log(n);
     </script>
     
 </body>
