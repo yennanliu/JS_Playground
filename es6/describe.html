@@ -36,9 +36,35 @@
         // or, can do below (ES6) : object desconstruct
         const{name2, age2, language2} = person;
         console.log(name2, age2, language2);
+
+        // get name val from person, and set as var abc's val
+        const{name:abc, age3, language3} = person;
         
 
+        // 3) ---------------------------- string extension (ES6)
+        let str = "hello.vue";
+        console.log(str.startsWith("hello"));
+        console.log(str.endsWith(".vue"));
+        console.log(str.includes("hello"));
+        console.log(str.includes("e"));
 
+        // 4) ---------------------------- string pattern
+        
+        // example 1
+        let ss = `
+                <div>
+                    <span>hello world!!!<span>
+                <div>
+                `
+        console.log(ss);
+
+        // example 2: can use var, expression, in ${}, can use JS syntax
+        let name4 = "jack";
+        let age4 = 22;
+        let info4 = "I am ${name4}, ${age4} years old";
+        let info4_1 = `I am ${name4}, ${age4} years old`; // notice `` herew
+        console.log(info4);
+        console.log(info4_1);
 
     </script>
     
