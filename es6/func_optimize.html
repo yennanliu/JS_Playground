@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        // https://youtu.be/YjsAA8L7JJY?t=10
+
+        // 1) ----------------------------
+        // before ES6, we CAN'T give default val to a func, so can only use below workarond:
+        function add(a, b){
+            // check if b is null, if b is null, give 1 as default value
+            console.log("b = " + b);
+            b = b || 1;
+            console.log("a = " + a);
+            console.log("b = " + b);
+            return a + b;
+        }
+        
+        console.log(add(10));
+
+        // in ES6, we can do below: setup defult value in function var directly
+        function add2(a, b=1){
+            return a + b;
+        }
+
+        console.log(add2(99));
+
+        // 2) ---------------------------- 不定參數.
+        // note : the dynamic var CAN only be put in the last position
+        function func1(...values){
+            console.log(values.length);
+        }
+
+        console.log(func1(1));
+        console.log(func1(1,2,3));
+
+
+        // 3) ---------------------------- Arrow function (important!!!)
+
+        // example 1
+        // before, we define a method as below:
+        var print = function(obj){
+            console.log(obj);
+        }
+
+        // in ES6, we can do below:
+        var print2 = obj => console.log(obj);
+        print2("js hello world>>>>>");
+
+        // example 2
+        // before
+        var sum = function(a, b){
+            return a + b;
+        }
+
+        // in ES6,
+        var sum2 = (a,b) => a + b;
+        console.log(sum2(-1, -2));
+
+
+
+
+    </script>
+    
+</body>
+</html>
