@@ -63,9 +63,33 @@
         var sum2 = (a,b) => a + b;
         console.log(sum2(-1, -2));
 
+        // example 3
+        var sum3 = (a,b) => {
+            c = a + b;
+            return a + c;
+        }
+        console.log(sum3(-1, -2));
 
+        // example 4
+        const person = {
+            name: "mary",
+            age: 19,
+            language: ["java", "scala", "c"]
+        }
 
+        function hello(person){
+            console.log("hello !! "  + person.name);
+        }
 
+        hello(person);
+
+        // ES6
+        var hello2 = (person) => console.log("hello !! "  + person.name);
+        hello2(person);
+
+        // ES5, desconstruct expression + Arrow function
+        var hello3 = ({name}) => console.log("hello !! "  + person.name);
+        hello3(person);
     </script>
     
 </body>
