@@ -1,6 +1,4 @@
-## utility_JS
-
-
+## JS_Playground
 
 CRUD methods | HTTP Method	Definition 
 ------------ | -------------
@@ -10,23 +8,14 @@ Update	|  PUT/PATCH Updates an existing resource
 Delete	|  DELETE Deletes a resource
 
 
-### run JS script via Node.js 
+## Useful CMD
+- 1) (in VScode), create a new HTML, then press "shift + !" -> HTML file is ready
+	- https://youtu.be/-qdpYvJ9_xM?t=117
 
-```Bash
-node basic.js 
+### Ref
+- ES6
+	- https://youtu.be/-qdpYvJ9_xM?t=96
 
-```
-
-
-### d3.js script 
-
-
-```Bash
-#dev 
-
-```
-
-### Ref 
 - HTTP API JSONPlaceholder
 	- https://jsonplaceholder.typicode.com/
 - HTTP API tutorial
