@@ -77,6 +77,17 @@
 
     // 5) ---------------------------- object extension operator
 
+    // example 1) : copy object (deep copy)
+    let person_x = {name : "kim", age: 17};
+    let someone = {...person_x};
+    console.log(someone);
+
+    // example 2) merge object
+    let age1 = {age: 15};
+    let name1 = {name : "kelly"};
+    let person_x2 = {...age1, ...name1}; // split attr in age1, name1, and put them as person_x2's attr
+    console.log(person_x2);
+
    </script>
     
 </body>
