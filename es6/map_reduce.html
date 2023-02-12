@@ -48,6 +48,13 @@
         });
         
         console.log("res1 = " + res1);
+
+        // test 2 : reduce with init value
+        let res2 = arr.reduce((a, b) => {
+            console.log("after last op :  " + a + ", current op : " + b);
+            return a + b;
+        }, 100);
+        console.log("res2 = " + res2);
     </script>
     
 </body>
