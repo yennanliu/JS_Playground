@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+   <script>
+    // https://youtu.be/PXJAwFzrWMY
+
+    // 1) ---------------------------- Object.xxx
+    const person = {
+            name: "mary",
+            age: 19,
+            language: ["java", "scala", "c"]
+        }
+
+    console.log(Object.keys(person));
+    console.log(Object.values(person));
+    console.log(Object.entries(person));
+
+    // 2) ---------------------------- assign
+    const target = {a : 1};
+    const src1 = {b: 2};
+    const src2 = {c : 3};
+
+    // Object.assign's first param is target object, the other params are src object
+    // -> assign src1, src2 val to target 
+    Object.assign(target, src1, src2);
+    console.log(target);
+
+    // 3) ---------------------------- declare object shortcut
+    
+    const age = 23;
+    const name = "amy";
+    
+    // before
+    const person1 = {age: age, name: name};
+
+    // in ES6
+    const person2 = {age, name} // ONLY works if attr key, attr val are the same
+
+
+    // 4) ---------------------------- object func attr shortcut
+    
+    // before
+    let person3 = {
+        name : "jack",
+        // before
+        eat: function(food){
+            console.log(this.name + " is eating " + food);
+        }
+    }
+
+    // in ES6
+
+
+   </script>
+    
+</body>
+</html>

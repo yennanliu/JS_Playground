@@ -26,12 +26,3 @@ Delete	|  DELETE Deletes a resource
 ### Course 
 - javascript-basics-for-beginners
 	- https://www.udemy.com/javascript-basics-for-beginners/
-	
-
-
-
-
-
-
-
-
