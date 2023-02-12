@@ -55,8 +55,27 @@
         }
     }
 
-    // in ES6
+    person3.eat("salad");
 
+    // in ES6
+    let person4 = {
+        name : "jack",
+        
+        // in ES6
+        eat: food =>  
+            // NOTE!! can't use this.name here, but have to use obj.name
+            console.log(person4.name + " is eating " + food), // can't use ";" here
+        
+        // the other style
+        eat2(food){
+            console.log(this.name + " is eating " + food);
+        }
+    }
+
+    person4.eat("chicken");
+    person4.eat2("chicken");
+
+    // 5) ---------------------------- object extension operator
 
    </script>
     
