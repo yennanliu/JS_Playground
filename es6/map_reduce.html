@@ -55,6 +55,15 @@
             return a + b;
         }, 100);
         console.log("res2 = " + res2);
+
+        // test 3: https://appdividend.com/2022/03/08/javascript-reduce/
+        const data = [5, 10, 15, 20, 25];
+
+        const res = data.reduce((total,currentValue) => {
+        return total + currentValue;
+        });
+
+        console.log(res); // 75
     </script>
     
 </body>
