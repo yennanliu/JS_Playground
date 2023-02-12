@@ -8,6 +8,13 @@ Update	|  PUT/PATCH Updates an existing resource
 Delete	|  DELETE Deletes a resource
 
 
+### Quick start
+- ES6
+	- Open with VSCode
+	- Open HTML, right click and select "open with live server"
+	- chrome browser -> view -> developer -> javascript console
+	- done!
+
 ## Useful CMD
 - 1) (in VScode), create a new HTML, then press "shift + !" -> HTML file is ready
 	- https://youtu.be/-qdpYvJ9_xM?t=117
