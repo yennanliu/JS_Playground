@@ -56,6 +56,7 @@
          * 
         */
         let p = new Promise((resolve, reject) => {
+
             // 1) async op
             $.ajax({
                 url: "mock/user.json",
@@ -69,10 +70,13 @@
                     reject(err);
                 }
             });
+
         })
 
         // p.then will continously opeate resolve data resolve(data)
         p.then((obj) => {
+
+            return new Promise((resolve, reject) => {
             // get success data from last step
             $.ajax({
                 url: `mock/user_course_${obj.id}.json`,
@@ -85,8 +89,23 @@
                 error: function(err){
                     reject(err);
                 }
-            })
-        }).catch((err) => {
+              });
+           })
+
+        }).then((data) => {
+
+            console.log("STEP 3) get result from STEP 2) : ", data);
+
+            $.ajax({
+                url: `mock/course_score_${data.id}.json`,
+                // if success
+                success: function(data) {
+                    console.log("STEP 4) get source score : ", data);
+                },
+                // if failure
+                error: function(err){
+                }
+            });
 
         })
 
