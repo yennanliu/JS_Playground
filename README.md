@@ -15,6 +15,13 @@ Delete	|  DELETE Deletes a resource
 	- chrome browser -> view -> developer -> javascript console
 	- done!
 
+### Importance concepts
+- Module
+	- https://youtu.be/_ZGSmdbAQeo?t=14
+	- `export` : export module, so other can use
+	- `import` : import external modules
+		- NOTE: export can export module, object, array (all JS variables)....
+
 ## Useful CMD
 - 1) (in VScode), create a new HTML, then press "shift + !" -> HTML file is ready
 	- https://youtu.be/-qdpYvJ9_xM?t=117
