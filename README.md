@@ -23,7 +23,8 @@ Delete	|  DELETE Deletes a resource
 	```bash
 	# init project
 	cd vue2
-	npm init -y        
+	npm init -y  
+	npm install vue      
 	```
 
 	- Method 2) Use CDN
