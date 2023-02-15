@@ -15,6 +15,23 @@ Delete	|  DELETE Deletes a resource
 	- chrome browser -> view -> developer -> javascript console
 	- done!
 
+- Vue 2.x
+	- https://youtu.be/eK_lo6M7zWc?t=239
+	- https://vuejs.org/guide/quick-start.html#using-vue-from-cdn
+
+	- Method 1) Init with NPM
+	```bash
+	# init project
+	cd vue2
+	npm init -y        
+	```
+
+	- Method 2) Use CDN
+	```html
+	<!-- use via CDN, or you can use npm -->
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	```
+
 ### Importance concepts
 - Module
 	- https://youtu.be/_ZGSmdbAQeo?t=14
