@@ -8,6 +8,17 @@ Update	|  PUT/PATCH Updates an existing resource
 Delete	|  DELETE Deletes a resource
 
 
+## Env
+- VSCode
+	- plugin
+		- vue 2 Snippets
+- Chrome
+	- extension
+		- vue-dev-tool
+			- https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd/related?hl=en
+- Vue 2
+- Node
+
 ### Quick start
 - ES6
 	- Open with VSCode

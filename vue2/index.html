@@ -20,6 +20,7 @@
         -->
         <button v-on:click="num++">click like</button>
         <button v-on:click="num--">click dislike</button>
+        <button v-on:click="dislike_">click dislike V2</button> <!-- via method -->
         <h1> {{name}} is beautiful, has {{num}} followers </h1>
     </div>
 
@@ -35,13 +36,25 @@
     -->
 
     <script>
+
+        Vue.config.devtools = true
+
         // 1) ----------------------- 
         // vue 聲明式渲染
         let vm = new Vue({
-            el: "#app", // NOTE!!! this is "el", but not "e1"
-            data: {
+            el: "#app", // for binding element // NOTE!!! this is "el", but not "e1"
+            data: {  // espaculate data 
                 name: "Lynn",
                 num: 1
+            },
+            // https://youtu.be/i1ZAcjkSzKQ?t=350
+            methods:{  // espaculate method
+                dislike_(){
+                    this.num -- ;
+                },
+                hello(){
+                    console.log("my hello");
+                }
             }
         });
 
@@ -62,8 +75,13 @@
         // STEPS: (in summary)
         //  step 1) (responsive) create vue instance, bind html element, render data to the template
         //  step 2) simplify above via command
-        //  step 3) simplify above via method
-    </script>
+        //  step 3) simplify above via "methods(){}" (can have complex methods) 
+   
+        new Vue({
+
+        })
+   
+   </script>
     
 </body>
 </html>
