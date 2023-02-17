@@ -9,8 +9,17 @@
 <body>
 
     <div id="app">
-        <!-- https://youtu.be/i1ZAcjkSzKQ?t=92 -->
+        <!-- 
+            雙向綁定 https://youtu.be/i1ZAcjkSzKQ?t=92 
+        -->
         <input type="text" v-model="num">
+        <h1></h1>
+        <!-- 
+            事件綁定 https://youtu.be/i1ZAcjkSzKQ?t=162 
+            v-on:click="num++" : click, then num plus 1
+        -->
+        <button v-on:click="num++">click like</button>
+        <button v-on:click="num--">click dislike</button>
         <h1> {{name}} is beautiful, has {{num}} followers </h1>
     </div>
 
@@ -44,7 +53,16 @@
 
 
         // 3) -----------------------
-        // 事件處理
+        // 事件處理: v-on (<button v-on:click="num++">click like</button>)
+
+        // 4) -----------------------
+        // v-xx: 指令
+
+        // 5) -----------------------
+        // STEPS: (in summary)
+        //  step 1) (responsive) create vue instance, bind html element, render data to the template
+        //  step 2) simplify above via command
+        //  step 3) simplify above via method
     </script>
     
 </body>
