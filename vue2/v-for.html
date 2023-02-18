@@ -16,8 +16,8 @@
 
     <!-- for loop -->
         <div id="app">
+
             <ul>
-                
                 <!-- 1) show user info -->
                 <li v-for="user in users">
                     {{user.name}} => {{user.gender}} ==> {{user.age}}
@@ -32,11 +32,19 @@
                 <br/>
                 <!-- 3) for loop over object -->
                 <li v-for="(user, index) in users">
-                    <span v-for="v in user">{{v}}</span>
+                    <span v-for="v in user">{{v}}, </span>
+                    <br/>
+                    <span v-for="(v,k) in user">{{k}}: {{v}} </span>
                 </li>
-
-
             </ul>
+
+            <ul>
+                <li v-for="(num,index) in nums">
+                    {{index}} ==> {{num}}
+                </li>
+            </ul>
+
+
         </div>
 
 
@@ -52,7 +60,8 @@
                     {name: 'jack', gender: 'm', age:21},
                     {name: 'ann', gender: 'f', age:99},
                     {name: 'z', gender: 'm', age:34}
-                ]
+                ],
+                nums:[1,2,3,4]
             },
             methods:{
                 hello(){
