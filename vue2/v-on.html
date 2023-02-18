@@ -34,9 +34,10 @@
             
             big div
 
-            <div style="border: 1px solid blue; padding:20px;" @click="hello">
+            <!-- @click.stop : only execute event in small div, then STOP right away -->
+            <div style="border: 1px solid blue; padding:20px;" @click.stop="hello">
                 small div <br/>
-                <a href="google.com">go to google!</a>
+                <a v-bind:href="link">go to google!</a>
             </div>
 
         </div>
@@ -50,7 +51,8 @@
         let vm = new Vue({
             el: "#app",
             data: {
-                num: 1
+                num: 1,
+                link: "http://www.google.com"
             },
             methods:{
                 cancle(){
