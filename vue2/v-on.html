@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        https://youtu.be/nSuGmnip7V0?t=17
+        v-on demo
+    -->
+
+    <div id="app">
+
+        <!-- use js code in event (v-on:click="num++")-->
+        <button v-on:click="num++">like</button>
+
+        <!-- create a callback func in event, it have to be defined in Vue -->
+        <button v-on:click="num--">dislike</button>
+
+        <!-- -->
+        <h1> {{num}} like</h1>
+
+        <!-- event annotation -->
+        <div style="border: 1px solid red; padding:20px;">
+            
+            big div
+
+            <div style="border: 1px solid blue; padding:20px;">
+                small div <br/>
+                <a href="google.com">go to google!</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 1
+            }
+        })
+
+    </script>
+    
+</body>
+</html>
