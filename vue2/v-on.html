@@ -37,10 +37,13 @@
             <!-- @click.stop : only execute event in small div, then STOP right away -->
             <div style="border: 1px solid blue; padding:20px;" @click.stop="hello">
                 small div <br/>
-                <a v-bind:href="link">go to google!</a>
+                <!-- <a v-bind:href="link" @click.prevent>go to google!</a> -->
+                <a href="www.google.com" @click.prevent>go to google!</a>
             </div>
-
         </div>
+
+        <!-- button annotation -->
+        <input type="text" v-model="num" v-on:keyup.up="num+=2" @keyup.down="num-=2" @click.ctrl="num*10"><br/>
 
     </div>
 
