@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <!--
+        https://youtu.be/nSuGmnip7V0?t=523
+        v-for demo
+    -->
+
+    <!-- for loop -->
+        <div id="app">
+            <ul>
+                
+                <!-- 1) show user info -->
+                <li v-for="user in users">
+                    {{user.name}} => {{user.gender}} ==> {{user.age}}
+                </li>
+
+                <br/>
+                <!-- 2) get element index -->
+                <li v-for="(user, index) in users">
+                    index : {{index}}, user name ==> {{user.name}}
+                </li>
+
+                <br/>
+                <!-- 3) for loop over object -->
+                <li v-for="(user, index) in users">
+                    <span v-for="v in user">{{v}}</span>
+                </li>
+
+
+            </ul>
+        </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 1,
+                users: [
+                    {name: 'jack', gender: 'm', age:21},
+                    {name: 'ann', gender: 'f', age:99},
+                    {name: 'z', gender: 'm', age:34}
+                ]
+            },
+            methods:{
+                hello(){
+                    alert("hello!!!");
+                }
+            }
+        })
+
+    </script>
+
+</body>
+</html>
