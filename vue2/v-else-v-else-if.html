@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        https://youtu.be/nSuGmnip7V0?t=864
+        v-else, v-else-if demo
+    -->
+
+    <div id="app">
+
+        <button v-on:click="random-Math.random()">CLICK ME!!</button>
+        <span>{{random}}</span>
+
+        <h1 v-if="random > 0.76">
+            Can you see me ? &gt; = 0.75
+        </h1>
+
+        <h1 v-else-if="random > 0.5">
+            Can you see me ? &gt; = 0.5
+        </h1>
+
+        <h1 v-else-if="random > 0.2">
+            Can you see me ? &gt; = 0.2
+        </h1>
+
+        <h1 v-else="random > 0.76">
+            Can you see me ? &gt; = 0.2
+        </h1>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 1,
+                random:1
+            },
+            methods:{
+                hello(){
+                    alert("hello!!!");
+                }
+            }
+        })
+
+    </script>
+
+
+</body>
+</html>
