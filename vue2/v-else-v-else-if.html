@@ -15,10 +15,11 @@
 
     <div id="app">
 
-        <button v-on:click="random-Math.random()">CLICK ME!!</button>
+        <button v-on:click="random=Math.random()">CLICK ME!!</button>
+        <br/>
         <span>{{random}}</span>
 
-        <h1 v-if="random > 0.76">
+        <h1 v-if="random > 0.75">
             Can you see me ? &gt; = 0.75
         </h1>
 
