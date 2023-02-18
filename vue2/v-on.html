@@ -20,16 +20,21 @@
 
         <!-- create a callback func in event, it have to be defined in Vue -->
         <button v-on:click="num--">dislike</button>
+        <button v-on:click="cancle">dislikeV2</button>
+        <button @click="cancle">dislikeV3</button>
 
         <!-- -->
         <h1> {{num}} like</h1>
 
-        <!-- event annotation -->
-        <div style="border: 1px solid red; padding:20px;">
+        <!-- 
+            event annotation
+            https://youtu.be/nSuGmnip7V0?t=201
+        -->
+        <div style="border: 1px solid red; padding:20px;" v-on:click="hello">
             
             big div
 
-            <div style="border: 1px solid blue; padding:20px;">
+            <div style="border: 1px solid blue; padding:20px;" @click="hello">
                 small div <br/>
                 <a href="google.com">go to google!</a>
             </div>
@@ -46,6 +51,14 @@
             el: "#app",
             data: {
                 num: 1
+            },
+            methods:{
+                cancle(){
+                    this.num--;
+                },
+                hello(){
+                    alert("hello!!!");
+                }
             }
         })
 
