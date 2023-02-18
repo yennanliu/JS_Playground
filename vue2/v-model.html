@@ -11,13 +11,35 @@
     <!--
     https://youtu.be/LWDM9xcS71w?t=865
 
-    v-bind demo (雙向綁定)
+    (雙向綁定)
     -->
+
+    <div id="app">
+        Programming language:
+        <br/>
+        <br/>
+            <input type="checkbox" v-model="lang" value="java"> java<br/>
+            <input type="checkbox" v-model="lang" value="go"> go<br/>
+            <input type="checkbox" v-model="lang" value="scala"> scala<br/>
+        <br/>
+        Select ones:
+            
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 
     <script>
-        
+
+        let vm = new Vue({
+            el: "#app",
+            data:{
+                lang: []
+            },
+            methods:{
+
+            }
+        })
+
     </script>
 </body>
 </html>
