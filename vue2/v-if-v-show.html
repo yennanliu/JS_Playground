@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <!--
+        https://youtu.be/nSuGmnip7V0?t=864
+        v-show demo
+
+        v-if : if condition true, then parse elements
+        v-show: if condition trye, then the element is shown
+    -->
+    <div id="app">
+        <button v-on:click="show = !show">CLICK ME!!!</button>
+        <!-- 1) use v-if to show -->
+        <h1 v-if="show">if=see me</h1>
+        <!-- 1) use v-show to show -->
+        <h1 v-show="show">show=see me</h1>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 1,
+                show: true
+            },
+            methods:{
+                hello(){
+                    alert("hello!!!");
+                }
+            }
+        })
+
+    </script>
+
+
+</body>
+</html>
