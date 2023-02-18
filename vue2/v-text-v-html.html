@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- https://youtu.be/LWDM9xcS71w?t=20 -->
+
+
+    <div id = "app">
+
+        {{msg}} <br/>
+        <span v-html="msg"></span> <!-- v-html: get msg's content and parse as html content -->
+        
+        <br/>
+        <span v-text="msg"></span> <!-- v-text: get msg's content (NOT parse as html content)-->
+
+        <br/>
+        {{1+1}}
+        
+        <br/>
+        {{hello()}}
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                msg: "<h1>hello!</h1>"
+            },
+            methods:{
+                hello(){
+                    return "world !!!!"
+                }
+            }
+        })
+    
+    </script>
+    
+</body>
+</html>
