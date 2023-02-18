@@ -27,7 +27,10 @@
         <br/>
 
         <!-- class.style -->
-        <span v-bind:class="{active:isActive, 'text-danger':hasError}">good day!!!!</span>
+        <span v-bind:class="{active:isActive, 'text-danger':hasError}"
+              v-bind:style="{color: color1}">
+              good day!!!!
+        </span>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
@@ -39,7 +42,9 @@
             data:{
                 link: "http://www.google.com",
                 isActive: true,
-                hasError: true
+                hasError: true,
+                color1: 'red',
+                size1: '90px'
             }
         })
 
