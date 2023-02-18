@@ -22,8 +22,8 @@
             <input type="checkbox" v-model="lang" value="go"> go<br/>
             <input type="checkbox" v-model="lang" value="scala"> scala<br/>
         <br/>
-        Select ones:
-            
+        Selected ones: {{lang.join(", ")}}
+             
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
