@@ -11,7 +11,7 @@
     <!--
     https://youtu.be/LWDM9xcS71w?t=343
 
-    v-bind demo
+    v-bind demo (單向綁定)
     -->
 
     <div id="app">
@@ -28,7 +28,7 @@
 
         <!-- class.style -->
         <span v-bind:class="{active:isActive, 'text-danger':hasError}"
-              v-bind:style="{color: color1}">
+              v-bind:style="{color: color1, fontsize: size1}">
               good day!!!!
         </span>
     </div>
@@ -37,14 +37,14 @@
 
     <script>
 
-        new Vue({
+        let vm = new Vue({
             el: "#app",
             data:{
                 link: "http://www.google.com",
                 isActive: true,
                 hasError: true,
                 color1: 'red',
-                size1: '90px'
+                size1: '100px'
             }
         })
 
