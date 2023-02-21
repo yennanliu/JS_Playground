@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        https://youtu.be/1t0og0uS5G0
+        compute attr, detector demo
+    -->
+
+    <div id="app">
+        <ul>
+            <li>zero to 1: price: {{zPrice}}, amount: <input type="number" v-model="zNum"></li>
+            <li>system design interview, price: {{sPrice}}, amount: <input type="number" v-model="sNum"></li>
+            <li>total price: xxx</li>
+        </ul>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data:{
+                zPrice: 100.01,
+                sPrice: 99,
+                zNum: 1,
+                sNum: 2
+            },
+            methods:{
+
+            }
+        })
+    </script>
+    
+</body>
+</html>
