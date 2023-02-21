@@ -27,14 +27,31 @@
         <!-- V2 -->
         <ul>
             <li v-for="user in userList">
-                {{user.id}} ==> {{user.name}} ==> {{user.gender | gemderFilter}} <!-- via filter-->
+                {{user.id}} ==> {{user.name}} ==> {{user.gender | gemderFilter}} <!-- via local filter-->
             </li>
-        </ul>        
+        </ul>
+        
+        <!-- V3 -->
+        <ul>
+            <li v-for="user in userList">
+                {{user.id}} ==> {{user.name}} ==> {{user.gender | myFilter}} <!-- via global filter-->
+            </li>
+        </ul>
+                
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 
     <script>
+
+        // Vue attr: filter, global filter, can be used anywhere
+        Vue.filter("myFilter", function(val){ // NOTE: it's "filter" here
+            if (val == 1){
+                        return "male";
+                    }else{
+                        return "female";
+                    }
+        })
 
         let vm = new Vue({
             el: "#app",
@@ -44,6 +61,7 @@
                     {id:2, name:"ozi", gender:0}
                 ]
             },
+            // Vue attr: filter, local filter, can ONLY be used in Vue instance
             filters:{ // NOTE: "filters" instead of "filter"
                 gemderFilter(val){
                     if (val == 1){
