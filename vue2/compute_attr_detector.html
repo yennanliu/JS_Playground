@@ -15,9 +15,11 @@
 
     <div id="app">
         <ul>
-            <li>zero to 1: price: {{zPrice}}, amount: <input type="number" v-model="zNum"></li>
-            <li>system design interview, price: {{sPrice}}, amount: <input type="number" v-model="sNum"></li>
-            <li>total price: xxx</li>
+            <li>Zero to 1: price: {{zPrice}}, amount: <input type="number" v-model="zNum"></li>
+            <li>System design interview, price: {{sPrice}}, amount: <input type="number" v-model="sNum"></li>
+            <br/>
+            <li>Total price: {{totalPrice}}</li>
+            {{msg}}
         </ul>
     </div>
 
@@ -30,10 +32,29 @@
                 zPrice: 100.01,
                 sPrice: 99,
                 zNum: 1,
-                sNum: 2
+                sNum: 2,
+                msg: ""
             },
             methods:{
 
+            },
+            // Vue attr: compute element val
+            computed:{
+                totalPrice: function(){
+                    return this.zPrice * this.zNum + this.sPrice * this.sNum;
+                }
+            },
+            // Vue attr: monitor element val
+            watch:{
+                zNum: function(newVal, oldVal){
+                    alert("oldVal = "  + oldVal + " newVal = " + newVal);
+                    if(newVal > 3){
+                        this.msg = "over storage!!";
+                        this.newVal = 3;
+                    }else{
+                        this.msg = "";
+                    }
+                }
             }
         })
     </script>
