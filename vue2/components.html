@@ -14,20 +14,44 @@
     -->
 
     <div id="app">
+
+        <h2>V1</h2>
         <!-- v1 -->
         <button v-on:click="count++">Already clicked {{count}} times.</button>
 
+        <!-- 
+            v2 : Global component
+            
+            NOTE: count in each element is independent from each other
+        -->
         <br/>
-        <!-- v2 -->
+        <h2>V2</h2>
         <counter></counter>
+        <br/>
+        <counter></counter>
+        <br/>
+        <counter></counter>
+        <br/>
+
+        <!-- 
+            v3 : Partitial component
+            
+        --> 
+        <h2>V3</h2>
+        <button-counter></button-counter>
+        <br/>       
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
 
     <script>
 
-        // 1) global declaration and register a component
+        // 1) Global declaration and register a component
         // NOTE : Vue template VS Vue el
+        // NOTE : component is a Vue instance as well, so it also has data, methods..  and life cycle func
+        // NOTE : component NOT binds with html element, so its has NO el attr
+        // NOTE : but component need parse to html template, so it has template attr
+
         Vue.component("counter", {
             template: `<button v-on:click="count++">Already clicked {{count}} times.</button>`,
             data(){
@@ -37,13 +61,28 @@
             }
         })
 
+        // 2) Partitial declaration and register a component
+        const buttonCounter = {
+            template: `<button v-on:click="count++">Already clicked {{count}} times.</button>`,
+            data(){
+                return {
+                    count: 1
+                }
+            }
+        }
 
+        // regular Vue instance
         let vm = new Vue({
             el: "#app",
             data:{
                 count: 1
             },
-            methods:{}
+            methods:{},
+            // if want to use component in Vue instance
+            components:{
+                // k:v
+                'button-counter': buttonCounter
+            }
         })
     </script>
     
