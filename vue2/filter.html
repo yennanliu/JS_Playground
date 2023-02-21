@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        https://youtu.be/1t0og0uS5G0?t=401
+        filter demo
+    -->
+
+    <div id="app">
+
+        <!-- V1 -->
+        <ul>
+            <li v-for="user in userList">
+                {{user.id}} ==> {{user.name}} ==> {{user.gender == 1? "male":"female"}} <!-- ternary op -->
+            </li>
+        </ul>
+
+        <br/>
+
+        <!-- V2 -->
+        <ul>
+            <li v-for="user in userList">
+                {{user.id}} ==> {{user.name}} ==> {{user.gender | gemderFilter}} <!-- via filter-->
+            </li>
+        </ul>        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                userList:[
+                    {id:1, name:"abby", gender:1},
+                    {id:2, name:"ozi", gender:0}
+                ]
+            },
+            filters:{ // NOTE: "filters" instead of "filter"
+                gemderFilter(val){
+                    if (val == 1){
+                        return "male";
+                    }else{
+                        return "female";
+                    }
+                }
+            }
+        })
+
+    </script>
+
+    
+</body>
+</html>
