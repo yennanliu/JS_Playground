@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!--
+        https://youtu.be/CM1RG4TFfo8
+        component demo
+    -->
+
+    <div id="app">
+        <!-- v1 -->
+        <button v-on:click="count++">Already clicked {{count}} times.</button>
+
+        <br/>
+        <!-- v2 -->
+        <counter></counter>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+
+    <script>
+
+        // 1) global declaration and register a component
+        // NOTE : Vue template VS Vue el
+        Vue.component("counter", {
+            template: `<button v-on:click="count++">Already clicked {{count}} times.</button>`,
+            data(){
+                return {
+                    count: 1
+                }
+            }
+        })
+
+
+        let vm = new Vue({
+            el: "#app",
+            data:{
+                count: 1
+            },
+            methods:{}
+        })
+    </script>
+    
+</body>
+</html>
