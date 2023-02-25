@@ -50,6 +50,9 @@ Delete	|  DELETE Deletes a resource
 	- `export` : export module, so other can use
 	- `import` : import external modules
 		- NOTE: export can export module, object, array (all JS variables)....
+- Vue life cycle
+	- https://youtu.be/WZuxG72ZzfI?t=285
+	- [code](https://github.com/yennanliu/JS_Playground/blob/master/ref_project/vue2/4%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0/1%E3%80%81%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.html)
 
 ## Useful CMD
 - 1) (in VScode), create a new HTML, then press "shift + !" -> HTML file is ready
