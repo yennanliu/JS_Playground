@@ -44,6 +44,16 @@ Delete	|  DELETE Deletes a resource
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	```
 
+	- Install webpack
+	```bash
+	npm install webpack -g
+	```
+
+	- Install CLI
+	```bash
+	npm install -g @vue/cli-init
+	```
+
 ### Importance concepts
 - Module
 	- https://youtu.be/_ZGSmdbAQeo?t=14
