@@ -17,6 +17,7 @@ function createDashboard() {
 
     // Sample data (can replace this with actual data in your Google Sheet)
     var data = [
+        ['date', 'price'],
         ['2024-01-01', 1],
         ['2024-01-02', 30],
         ['2024-01-03', 2],
@@ -29,8 +30,29 @@ function createDashboard() {
         ['2024-01-10', 45]
     ];
 
+
+    for (var i = 0; i < data.length; i++) {
+        if (i == 0) {
+            data[i].push('price plus 1');
+        } else {
+            //tmp = data[i]
+            data[i].push(data[i][1] + 1);
+        }
+    }
+
+    // data[0].push('Value Plus One');
+
+    // // Add the calculated values for the new column
+    // for (var i = 1; i < data.length; i++) {
+    //   data[i].push(data[i][1] + 1); // Get "Value" (index 1) and add 1
+    // }
+
+    var numRows = data.length;
+    var numCols = data[0].length;
+    sheet.getRange(1, 1, numRows, numCols).setValues(data);
+
     // Add the data to the sheet starting from row 2
-    sheet.getRange('A2:B' + (data.length + 1)).setValues(data);
+    //sheet.getRange('A2:B' + (data.length + 1)).setValues(data);
 
     // --- Chart Positioning and Ordering ---
     var chartsPerRow = 2; // Number of charts per row
@@ -42,7 +64,7 @@ function createDashboard() {
     var startColumn = 1;           // Starting column for the first chart
 
     // Loop through and create charts, positioning them in the grid
-    for (var i = 0; i < 5; i++) { // Create 5 charts for demonstration
+    for (var i = 0; i < 2; i++) { // Create 5 charts for demonstration
         var chartBuilder = sheet.newChart()
             .setChartType(Charts.ChartType.LINE)  // Line chart
             .addRange(sheet.getRange('A2:B' + (data.length + 1))) // Data range
@@ -66,6 +88,6 @@ function createDashboard() {
 
     // Optional: Add a title in cell A1
     var sheetName = sheet.getName();  // Get the sheet name
-    sheet.getRange('A1').setValue('Dashboard for: ' + sheetName);  // Set sheet name in cell A1
-    sheet.getRange('B1').setValue('ZZZ');  // Set sheet name in cell A1
+    //sheet.getRange('A1').setValue('Dashboard for: ' + sheetName);  // Set sheet name in cell A1
+    //sheet.getRange('B1').setValue('ZZZ');  // Set sheet name in cell A1
 }
