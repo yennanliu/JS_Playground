@@ -24,7 +24,6 @@ function createDashboard() {
   
     // --- Get and Update Data ---
     var data = getData(); // Call the getData() function from data.gs
-  
     //data = updateData(data); // Call the updateData function
     for (var i = 0; i < data.length; i++) {
       if (i == 0) {
@@ -40,28 +39,19 @@ function createDashboard() {
     dataSheet.getRange(1, 1, numRows, numCols).setValues(data);
   
     // --- Chart Positioning and Ordering ---
-    var chartsPerRow = 2; // Number of charts per row
-    var chartWidth = 400;  // Width of each chart (in pixels)
-    var chartHeight = 300; // Height of each chart (in pixels)
+    var chartsPerRow = 4; // Number of charts per row (extended horizontally)
+    var chartWidth = 300;  // Width of each chart (in pixels) - adjusted for more horizontal charts
+    var chartHeight = 200; // Height of each chart (in pixels) - adjusted for more horizontal charts
     var chartSpacingHorizontal = 0; // Horizontal space between charts (no gap)
     var chartSpacingVertical = 0;   // Vertical space between charts (no gap)
     var startRow = 1;              // Starting row for the first chart (top)
     var startColumn = 1;           // Starting column for the first chart (left)
-  
-    var chartTypes = [
-      Charts.ChartType.BAR,
-      Charts.ChartType.LINE,
-      Charts.ChartType.AREA,
-      Charts.ChartType.COLUMN,
-      Charts.ChartType.SCATTER
-      // Add more chart types as needed
-    ];
+    var numberOfCharts = 20;        // Total number of charts to create
   
     // Loop through and create charts, positioning them in order without gaps
-    for (var i = 0; i < 6; i++) { // Create 4 charts for demonstration
-      var randomChartType = chartTypes[Math.floor(Math.random() * chartTypes.length)];
+    for (var i = 0; i < numberOfCharts; i++) {
       var chartBuilder = chartSheet.newChart()
-        .setChartType(randomChartType)  // Line chart
+        .setChartType(Charts.ChartType.LINE)  // Line chart
         /** NOTE !!! load data from datasheet */
         .addRange(dataSheet.getRange('A2:B' + numRows)) // Data range
         .setOption('title', 'Price Over Time ' + (i + 1))  // Chart title
