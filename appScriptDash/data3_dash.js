@@ -48,10 +48,20 @@ function createDashboard() {
     var startRow = 1;              // Starting row for the first chart (top)
     var startColumn = 1;           // Starting column for the first chart (left)
   
+    var chartTypes = [
+      Charts.ChartType.BAR,
+      Charts.ChartType.LINE,
+      Charts.ChartType.AREA,
+      Charts.ChartType.COLUMN,
+      Charts.ChartType.SCATTER
+      // Add more chart types as needed
+    ];
+  
     // Loop through and create charts, positioning them in order without gaps
     for (var i = 0; i < 6; i++) { // Create 4 charts for demonstration
+      var randomChartType = chartTypes[Math.floor(Math.random() * chartTypes.length)];
       var chartBuilder = chartSheet.newChart()
-        .setChartType(Charts.ChartType.LINE)  // Line chart
+        .setChartType(randomChartType)  // Line chart
         /** NOTE !!! load data from datasheet */
         .addRange(dataSheet.getRange('A2:B' + numRows)) // Data range
         .setOption('title', 'Price Over Time ' + (i + 1))  // Chart title
