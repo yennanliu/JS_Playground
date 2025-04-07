@@ -8,6 +8,13 @@ function createDashboard() {
         return;
     }
 
+    // --- Clear Existing Content ---
+    sheet.clearContents();
+    var charts = sheet.getCharts();
+    for (var i = 0; i < charts.length; i++) {
+        sheet.removeChart(charts[i]);
+    }
+
     // Sample data (can replace this with actual data in your Google Sheet)
     var data = [
         ['2024-01-01', 1],
@@ -60,4 +67,5 @@ function createDashboard() {
     // Optional: Add a title in cell A1
     var sheetName = sheet.getName();  // Get the sheet name
     sheet.getRange('A1').setValue('Dashboard for: ' + sheetName);  // Set sheet name in cell A1
+    sheet.getRange('B1').setValue('ZZZ');  // Set sheet name in cell A1
 }
