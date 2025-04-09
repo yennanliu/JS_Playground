@@ -2,48 +2,262 @@
 <html>
 
 <head>
-    <base target="_top">
-    <title>Simple Databox</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
+  <base target="_top">
+  <title>Simple BI Dashboard (Fake Data)</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
 
-        .databox {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+    .dashboard-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
 
-        .value {
-            font-size: 2em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
+    .chart-card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-        .label {
-            color: #777;
-            font-size: 1em;
-        }
-    </style>
+    h2 {
+      margin-top: 0;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
-    <div class="databox">
-        <div class="value">
-            <?= dataValue ?>
-        </div>
-        <div class="label">Your Data Value</div>
+  <h1>Simple BI Dashboard (Fake Data)</h1>
+  <div class="dashboard-container">
+
+    <div class="chart-card">
+      <h2>Opportunity Count by Partner Driven & Size</h2>
+      <canvas id="oppCountPartnerSizeChart"></canvas>
     </div>
+
+    <div class="chart-card">
+      <h2>Opportunity Count by Region</h2>
+      <canvas id="oppCountRegionChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h2>Revenue by Sales Stage</h2>
+      <canvas id="revenueByStageChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h2>Opportunity Count by Month & Stage</h2>
+      <canvas id="oppCountMonthStageChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h2>Average Revenue by Partner & Size</h2>
+      <canvas id="avgRevenuePartnerSizeChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h2>Factored Revenue by Size</h2>
+      <canvas id="factoredRevenueSizeChart"></canvas>
+    </div>
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const fakeData = {
+        oppCountPartnerSize: {
+          Yes: { Small: 25, Medium: 40, Large: 15 },
+          No: { Small: 30, Medium: 35, Large: 20 },
+        },
+        oppCountRegion: {
+          East: 120,
+          West: 95,
+          Central: 70,
+        },
+        revenueByStage: {
+          Lead: 50000,
+          Quality: 120000,
+          Solution: 250000,
+          Proposal: 180000,
+          Finalize: 350000,
+        },
+        oppCountMonthStage: {
+          Jan: { Lead: 10, Quality: 5, Solution: 3, Proposal: 2, Finalize: 1 },
+          Feb: { Lead: 8, Quality: 7, Solution: 5, Proposal: 3, Finalize: 2 },
+          Mar: { Lead: 12, Quality: 6, Solution: 4, Proposal: 4, Finalize: 3 },
+          Apr: { Lead: 9, Quality: 8, Solution: 6, Proposal: 5, Finalize: 4 },
+          May: { Lead: 11, Quality: 7, Solution: 7, Proposal: 6, Finalize: 5 },
+          Jun: { Lead: 7, Quality: 9, Solution: 8, Proposal: 7, Finalize: 6 },
+        },
+        avgRevenuePartnerSize: {
+          Yes: { Small: 2000, Medium: 5000, Large: 12000 },
+          No: { Small: 1500, Medium: 4000, Large: 10000 },
+        },
+        factoredRevenueBySize: {
+          Small: 80000,
+          Medium: 150000,
+          Large: 280000,
+        },
+      };
+
+      // --- Chart 1: Opportunity Count by Partner Driven & Size (Bar Chart) ---
+      const oppCountPartnerSizeCtx = document.getElementById('oppCountPartnerSizeChart').getContext('2d');
+      const partnerDrivenLabels = Object.keys(fakeData.oppCountPartnerSize);
+      const sizeLabels = ['Small', 'Medium', 'Large'];
+
+      const datasetsPartnerSize = sizeLabels.map(size => ({
+        label: size,
+        data: partnerDrivenLabels.map(partner => fakeData.oppCountPartnerSize[partner]?.[size] || 0),
+        backgroundColor: size === 'Small' ? 'rgba(54, 162, 235, 0.7)' : (size === 'Medium' ? 'rgba(255, 206, 86, 0.7)' : 'rgba(75, 192, 192, 0.7)'),
+      }));
+
+      new Chart(oppCountPartnerSizeCtx, {
+        type: 'bar',
+        data: {
+          labels: partnerDrivenLabels,
+          datasets: datasetsPartnerSize,
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'Opportunity Count' } },
+            x: { title: { display: true, text: 'Partner Driven' } },
+          },
+          plugins: { title: { display: true, text: 'Opportunity Count by Partner Driven & Size' } },
+        },
+      });
+
+      // --- Chart 2: Opportunity Count by Region (Pie Chart) ---
+      const oppCountRegionCtx = document.getElementById('oppCountRegionChart').getContext('2d');
+      const regionLabels = Object.keys(fakeData.oppCountRegion);
+      const regionCounts = regionLabels.map(region => fakeData.oppCountRegion[region]);
+      const regionColors = ['rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(255, 206, 86, 0.7)'];
+
+      new Chart(oppCountRegionCtx, {
+        type: 'pie',
+        data: {
+          labels: regionLabels,
+          datasets: [{
+            label: 'Opportunity Count by Region',
+            data: regionCounts,
+            backgroundColor: regionColors.slice(0, regionLabels.length),
+            borderWidth: 1,
+          }],
+        },
+        options: {
+          plugins: { title: { display: true, text: 'Opportunity Count by Region' } },
+        },
+      });
+
+      // --- Chart 3: Revenue by Sales Stage (Bar Chart) ---
+      const revenueByStageCtx = document.getElementById('revenueByStageChart').getContext('2d');
+      const stageLabels = Object.keys(fakeData.revenueByStage);
+      const stageRevenue = Object.values(fakeData.revenueByStage);
+      const stageColors = ['rgba(0, 123, 255, 0.7)', 'rgba(108, 117, 125, 0.7)', 'rgba(25, 135, 84, 0.7)', 'rgba(220, 53, 69, 0.7)', 'rgba(13, 110, 253, 0.7)'];
+
+      new Chart(revenueByStageCtx, {
+        type: 'bar',
+        data: {
+          labels: stageLabels,
+          datasets: [{
+            label: 'Revenue',
+            data: stageRevenue,
+            backgroundColor: stageColors.slice(0, stageLabels.length),
+          }],
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'Revenue' } },
+            x: { title: { display: true, text: 'Sales Stage' } },
+          },
+          plugins: { title: { display: true, text: 'Revenue by Sales Stage' } },
+        },
+      });
+
+      // --- Chart 4: Opportunity Count by Month & Stage (Stacked Bar Chart) ---
+      const oppCountMonthStageCtx = document.getElementById('oppCountMonthStageChart').getContext('2d');
+      const monthLabels = Object.keys(fakeData.oppCountMonthStage);
+      const stageLabelsMonth = ['Lead', 'Quality', 'Solution', 'Proposal', 'Finalize'];
+      const stageColorsMonth = ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(153, 102, 255, 0.7)'];
+
+      const datasetsMonthStage = stageLabelsMonth.map((stage, index) => ({
+        label: stage,
+        data: monthLabels.map(month => fakeData.oppCountMonthStage[month]?.[stage] || 0),
+        backgroundColor: stageColorsMonth[index],
+      }));
+
+      new Chart(oppCountMonthStageCtx, {
+        type: 'bar',
+        data: {
+          labels: monthLabels,
+          datasets: datasetsMonthStage,
+        },
+        options: {
+          scales: {
+            x: { stacked: true, title: { display: true, text: 'Month' } },
+            y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Opportunity Count' } },
+          },
+          plugins: { title: { display: true, text: 'Opportunity Count by Month & Stage' } },
+        },
+      });
+
+      // --- Chart 5: Average Revenue by Partner & Size (Bar Chart) ---
+      const avgRevenuePartnerSizeCtx = document.getElementById('avgRevenuePartnerSizeChart').getContext('2d');
+      const partnerLabelsAvgRev = Object.keys(fakeData.avgRevenuePartnerSize);
+      const sizeLabelsAvgRev = ['Small', 'Medium', 'Large'];
+      const colorsAvgRev = ['rgba(255, 159, 64, 0.7)', 'rgba(101, 205, 254, 0.7)', 'rgba(144, 238, 144, 0.7)'];
+
+      const datasetsAvgRev = sizeLabelsAvgRev.map((size, index) => ({
+        label: size,
+        data: partnerLabelsAvgRev.map(partner => fakeData.avgRevenuePartnerSize[partner]?.[size] || 0),
+        backgroundColor: colorsAvgRev[index],
+      }));
+
+      new Chart(avgRevenuePartnerSizeCtx, {
+        type: 'bar',
+        data: {
+          labels: partnerLabelsAvgRev,
+          datasets: datasetsAvgRev,
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'Average Revenue' } },
+            x: { title: { display: true, text: 'Partner Driven' } },
+          },
+          plugins: { title: { display: true, text: 'Average Revenue by Partner & Size' } },
+        },
+      });
+
+      // --- Chart 6: Factored Revenue by Size (Bar Chart) ---
+      const factoredRevenueSizeCtx = document.getElementById('factoredRevenueSizeChart').getContext('2d');
+      const sizeLabelsFactoredRev = Object.keys(fakeData.factoredRevenueBySize);
+      const factoredRevenueValues = Object.values(fakeData.factoredRevenueBySize);
+      const colorsFactoredRev = ['rgba(255, 205, 210, 0.7)', 'rgba(201, 148, 199, 0.7)', 'rgba(121, 134, 203, 0.7)'];
+
+      new Chart(factoredRevenueSizeCtx, {
+        type: 'bar',
+        data: {
+          labels: sizeLabelsFactoredRev,
+          datasets: [{
+            label: 'Factored Revenue',
+            data: factoredRevenueValues,
+            backgroundColor: colorsFactoredRev.slice(0, sizeLabelsFactoredRev.length),
+          }],
+        },
+        options: {
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: 'Factored Revenue' } },
+            x: { title: { display: true, text: 'Opportunity Size' } },
+          },
+          plugins: { title: { display: true, text: 'Factored Revenue by Size' } },
+        },
+      });
+    });
+  </script>
 </body>
 
 </html>
