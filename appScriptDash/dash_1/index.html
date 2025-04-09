@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <title>Simple Databox</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .databox {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .label {
+            color: #777;
+            font-size: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="databox">
+        <div class="value">
+            <?= dataValue ?>
+        </div>
+        <div class="label">Your Data Value</div>
+    </div>
+</body>
+
+</html>
