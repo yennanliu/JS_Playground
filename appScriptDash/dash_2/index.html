@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title>Delivery Startup Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #333;
+    }
+
+    .header {
+      background-color: #1976d2;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 500;
+    }
+
+    .date-display {
+      font-weight: 300;
+      font-size: 1rem;
+    }
+
+    .dashboard-container {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .chart-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-full-width {
+      grid-column: 1 / -1;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .card-value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 10px 0;
+    }
+
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .summary-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      text-align: center;
+    }
+
+    .summary-label {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 5px;
+    }
+
+    .summary-value {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #1976d2;
+    }
+
+    .chart-container {
+      flex-grow: 1;
+      position: relative;
+      height: 250px;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      color: #777;
+      font-size: 0.8rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      font-weight: 500;
+      color: #555;
+    }
+
+    .progress-container {
+      width: 100%;
+      background-color: #f1f1f1;
+      border-radius: 4px;
+      margin-top: 5px;
+    }
+    
+    .progress-bar {
+      height: 8px;
+      border-radius: 4px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+      font-size: 0.8rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      margin-right: 5px;
+      border-radius: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h1>Delivery Dashboard</h1>
+    <div class="date-display" id="currentDate"></div>
+  </div>
+
+  <div class="dashboard-container">
+    <!-- Summary Cards -->
+    <div class="card-full-width">
+      <div class="summary-cards">
+        <div class="summary-card">
+          <div class="summary-label">Total Deliveries</div>
+          <div class="summary-value" id="totalDeliveries">0</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Success Rate</div>
+          <div class="summary-value" id="successRate">0%</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Avg Delivery Time</div>
+          <div class="summary-value" id="avgDeliveryTime">0 min</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Customer Rating</div>
+          <div class="summary-value" id="avgRating">0.0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Deliveries Chart -->
+    <div class="chart-card card-full-width">
+      <div class="card-header">
+        <h3 class="card-title">Daily Delivery Performance</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="dailyDeliveriesChart"></canvas>
+      </div>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: rgba(54, 162, 235, 0.7)"></div>
+          <span>Delivered</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: rgba(255, 99, 132, 0.7)"></div>
+          <span>Failed</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background-color: rgba(255, 205, 86, 0.7)"></div>
+          <span>Pending</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delivery Time by Zone -->
+    <div class="chart-card">
+      <div class="card-header">
+        <h3 class="card-title">Avg. Delivery Time by Zone</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="deliveryTimeByZoneChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Revenue by Delivery Type -->
+    <div class="chart-card">
+      <div class="card-header">
+        <h3 class="card-title">Revenue by Delivery Type</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="revenueByTypeChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Customer Satisfaction -->
+    <div class="chart-card">
+      <div class="card-header">
+        <h3 class="card-title">Customer Satisfaction</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="customerSatisfactionChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Delivery Issues -->
+    <div class="chart-card">
+      <div class="card-header">
+        <h3 class="card-title">Delivery Issues</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="deliveryIssuesChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Driver Performance -->
+    <div class="chart-card card-full-width">
+      <div class="card-header">
+        <h3 class="card-title">Driver Performance</h3>
+      </div>
+      <table id="driverPerformanceTable">
+        <thead>
+          <tr>
+            <th>Driver</th>
+            <th>Deliveries</th>
+            <th>Avg Time</th>
+            <th>Rating</th>
+            <th>Performance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Will be populated via JavaScript -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Deliveries by Hour -->
+    <div class="chart-card card-full-width">
+      <div class="card-header">
+        <h3 class="card-title">Deliveries by Hour of Day</h3>
+      </div>
+      <div class="chart-container">
+        <canvas id="deliveryByHourChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Parse the dashboard data from the server
+    const dashboardData = JSON.parse('<?!= dashboardData ?>');
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set current date
+      const now = new Date();
+      document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      
+      // Calculate summary metrics
+      const totalDelivered = dashboardData.dailyDeliveries.delivered.reduce((sum, val) => sum + val, 0);
+      const totalFailed = dashboardData.dailyDeliveries.failed.reduce((sum, val) => sum + val, 0);
+      const totalPending = dashboardData.dailyDeliveries.pending.reduce((sum, val) => sum + val, 0);
+      const totalDeliveries = totalDelivered + totalFailed + totalPending;
+      const successRate = Math.round((totalDelivered / (totalDelivered + totalFailed)) * 100);
+      
+      // Calculate average delivery time
+      const zoneValues = Object.values(dashboardData.deliveryTimeByZone);
+      const avgDeliveryTime = Math.round(zoneValues.reduce((sum, val) => sum + val, 0) / zoneValues.length);
+      
+      // Calculate average customer rating
+      const avgRating = (dashboardData.customerSatisfaction.ratings.reduce((sum, val) => sum + val, 0) / 
+                        dashboardData.customerSatisfaction.ratings.length).toFixed(1);
+      
+      // Update summary cards
+      document.getElementById('totalDeliveries').textContent = totalDeliveries;
+      document.getElementById('successRate').textContent = successRate + '%';
+      document.getElementById('avgDeliveryTime').textContent = avgDeliveryTime + ' min';
+      document.getElementById('avgRating').textContent = avgRating;
+      
+      // Create charts
+      createDailyDeliveriesChart();
+      createDeliveryTimeByZoneChart();
+      createRevenueByTypeChart();
+      createCustomerSatisfactionChart();
+      createDeliveryIssuesChart();
+      createDeliveryByHourChart();
+      populateDriverPerformanceTable();
+    });
+    
+    function createDailyDeliveriesChart() {
+      const ctx = document.getElementById('dailyDeliveriesChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: dashboardData.dailyDeliveries.labels,
+          datasets: [
+            {
+              label: 'Delivered',
+              data: dashboardData.dailyDeliveries.delivered,
+              backgroundColor: 'rgba(54, 162, 235, 0.7)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Failed',
+              data: dashboardData.dailyDeliveries.failed,
+              backgroundColor: 'rgba(255, 99, 132, 0.7)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Pending',
+              data: dashboardData.dailyDeliveries.pending,
+              backgroundColor: 'rgba(255, 205, 86, 0.7)',
+              borderColor: 'rgba(255, 205, 86, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              stacked: true,
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              stacked: true,
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+    
+    function createDeliveryTimeByZoneChart() {
+      const ctx = document.getElementById('deliveryTimeByZoneChart').getContext('2d');
+      const labels = Object.keys(dashboardData.deliveryTimeByZone);
+      const data = Object.values(dashboardData.deliveryTimeByZone);
+      const backgroundColors = [
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(153, 102, 255, 0.7)',
+        'rgba(255, 159, 64, 0.7)'
+      ];
+      
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Minutes',
+            data: data,
+            backgroundColor: backgroundColors,
+            borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+    
+    function createRevenueByTypeChart() {
+      const ctx = document.getElementById('revenueByTypeChart').getContext('2d');
+      const labels = Object.keys(dashboardData.revenueByType);
+      const data = Object.values(dashboardData.revenueByType);
+      const backgroundColors = [
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(255, 206, 86, 0.7)',
+        'rgba(153, 102, 255, 0.7)'
+      ];
+      
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: data,
+            backgroundColor: backgroundColors,
+            borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                boxWidth: 12,
+                padding: 10
+              }
+            }
+          }
+        }
+      });
+    }
+    
+    function createCustomerSatisfactionChart() {
+      const ctx = document.getElementById('customerSatisfactionChart').getContext('2d');
+      
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: dashboardData.customerSatisfaction.labels,
+          datasets: [{
+            label: 'Rating',
+            data: dashboardData.customerSatisfaction.ratings,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 2,
+            pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+            tension: 0.2,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              min: 3,
+              max: 5,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+    
+    function createDeliveryIssuesChart() {
+      const ctx = document.getElementById('deliveryIssuesChart').getContext('2d');
+      const labels = Object.keys(dashboardData.deliveryIssues);
+      const data = Object.values(dashboardData.deliveryIssues);
+      const backgroundColors = [
+        'rgba(255, 99, 132, 0.7)',
+        'rgba(255, 159, 64, 0.7)',
+        'rgba(255, 205, 86, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(54, 162, 235, 0.7)'
+      ];
+      
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: data,
+            backgroundColor: backgroundColors,
+            borderColor: backgroundColors.map(color => color.replace('0.7', '1')),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                boxWidth: 12,
+                padding: 5,
+                font: {
+                  size: 10
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+    
+    function createDeliveryByHourChart() {
+      const ctx = document.getElementById('deliveryByHourChart').getContext('2d');
+      
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: dashboardData.deliveryByHour.hours.map(hour => `${hour}:00`),
+          datasets: [{
+            label: 'Deliveries',
+            data: dashboardData.deliveryByHour.counts,
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+    }
+    
+    function populateDriverPerformanceTable() {
+      const tableBody = document.getElementById('driverPerformanceTable').getElementsByTagName('tbody')[0];
+      const { drivers, deliveriesCompleted, avgRating, avgDeliveryTime } = dashboardData.driverPerformance;
+      
+      // Get highest values for calculating performance percentage
+      const maxDeliveries = Math.max(...deliveriesCompleted);
+      
+      // Clear existing rows
+      tableBody.innerHTML = '';
+      
+      // Add driver rows
+      drivers.forEach((driver, index) => {
+        const row = tableBody.insertRow();
+        
+        // Driver name
+        const nameCell = row.insertCell(0);
+        nameCell.textContent = driver;
+        
+        // Deliveries
+        const deliveriesCell = row.insertCell(1);
+        deliveriesCell.textContent = deliveriesCompleted[index];
+        
+        // Average delivery time
+        const timeCell = row.insertCell(2);
+        timeCell.textContent = avgDeliveryTime[index] + ' min';
+        
+        // Rating
+        const ratingCell = row.insertCell(3);
+        ratingCell.textContent = avgRating[index].toFixed(1);
+        
+        // Performance bar
+        const performanceCell = row.insertCell(4);
+        const performance = Math.round((deliveriesCompleted[index] / maxDeliveries) * 100);
+        
+        const progressContainer = document.createElement('div');
+        progressContainer.className = 'progress-container';
+        
+        const progressBar = document.createElement('div');
+        progressBar.className = 'progress-bar';
+        progressBar.style.width = `${performance}%`;
+        progressBar.style.backgroundColor = getColorForPerformance(performance);
+        
+        progressContainer.appendChild(progressBar);
+        performanceCell.appendChild(progressContainer);
+      });
+    }
+    
+    function getColorForPerformance(performance) {
+      if (performance >= 90) return 'rgba(75, 192, 192, 0.8)';
+      if (performance >= 70) return 'rgba(54, 162, 235, 0.8)';
+      if (performance >= 50) return 'rgba(255, 205, 86, 0.8)';
+      return 'rgba(255, 99, 132, 0.8)';
+    }
+  </script>
+</body>
+</html> 
