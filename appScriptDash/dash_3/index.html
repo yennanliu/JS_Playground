@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+      th, td { border: 1px solid #ddd; padding: 8px; }
+      th { background-color: #f2f2f2; }
+    </style>
+  </head>
+  <body>
+    <h2>Sheet Data</h2>
+    <button onclick="loadData()">Load Data</button>
+    <div id="tableContainer"></div>
+
+    <script>
+      function loadData() {
+        google.script.run.withSuccessHandler(displayData).getSheetData();
+        console.log(">>> (loadData HTML) data = " + JSON.stringify(data));
+      }
+
+      function displayData(data) {
+        if (!data || data.length === 0) {
+          document.getElementById('tableContainer').innerHTML = 'No data found.';
+          return;
+        }
+
+        let html = '<table>';
+        data.forEach((row, i) => {
+          html += '<tr>';
+          row.forEach(cell => {
+            html += i === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`;
+          });
+          html += '</tr>';
+        });
+        html += '</table>';
+
+        document.getElementById('tableContainer').innerHTML = html;
+      }
+    </script>
+  </body>
+</html>
