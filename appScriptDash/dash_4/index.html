@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      #chart_div {
+        width: 100%;
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Sales Dashboard</h2>
+    <div id="chart_div">Loading chart...</div>
+
+    <script>
+      // Load Google Charts
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(fetchData);
+
+      function fetchData() {
+        google.script.run.withSuccessHandler(drawChart).getDashboardData();
+      }
+
+      function drawChart(dataFromSheet) {
+        if (!dataFromSheet || dataFromSheet.length < 2) {
+          document.getElementById("chart_div").innerText = "No data available.";
+          return;
+        }
+
+        const data = google.visualization.arrayToDataTable(dataFromSheet);
+
+        const options = {
+          title: "Monthly Sales",
+          hAxis: {
+            title: "Month"
+          },
+          vAxis: {
+            title: "Sales",
+            minValue: 0
+          },
+          legend: { position: "none" },
+          colors: ["#4285F4"]
+        };
+
+        const chart = new google.visualization.ColumnChart(document.getElementById("chart_div"));
+        chart.draw(data, options);
+      }
+    </script>
+  </body>
+</html>
