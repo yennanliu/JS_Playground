@@ -3,7 +3,7 @@
 
 <head>
   <base target="_top">
-  <title>Simple BI Dashboard (Fake Data)</title>
+  <title>Simple BI Dashboard</title>
   <style>
     body {
       font-family: sans-serif;
@@ -32,7 +32,7 @@
 </head>
 
 <body>
-  <h1>Simple BI Dashboard (Fake Data)</h1>
+  <h1>Simple BI Dashboard</h1>
   <div class="dashboard-container">
 
     <div class="chart-card">
@@ -69,50 +69,22 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const fakeData = {
-        oppCountPartnerSize: {
-          Yes: { Small: 25, Medium: 40, Large: 15 },
-          No: { Small: 30, Medium: 35, Large: 20 },
-        },
-        oppCountRegion: {
-          East: 120,
-          West: 95,
-          Central: 70,
-        },
-        revenueByStage: {
-          Lead: 50000,
-          Quality: 120000,
-          Solution: 250000,
-          Proposal: 180000,
-          Finalize: 350000,
-        },
-        oppCountMonthStage: {
-          Jan: { Lead: 10, Quality: 5, Solution: 3, Proposal: 2, Finalize: 1 },
-          Feb: { Lead: 8, Quality: 7, Solution: 5, Proposal: 3, Finalize: 2 },
-          Mar: { Lead: 12, Quality: 6, Solution: 4, Proposal: 4, Finalize: 3 },
-          Apr: { Lead: 9, Quality: 8, Solution: 6, Proposal: 5, Finalize: 4 },
-          May: { Lead: 11, Quality: 7, Solution: 7, Proposal: 6, Finalize: 5 },
-          Jun: { Lead: 7, Quality: 9, Solution: 8, Proposal: 7, Finalize: 6 },
-        },
-        avgRevenuePartnerSize: {
-          Yes: { Small: 2000, Medium: 5000, Large: 12000 },
-          No: { Small: 1500, Medium: 4000, Large: 10000 },
-        },
-        factoredRevenueBySize: {
-          Small: 80000,
-          Medium: 150000,
-          Large: 280000,
-        },
-      };
-
+      const dashboardData = JSON.parse('<?!= dashboardData ?>');
+      
+      // If there's an error in fetching data, show an error message and return
+      if (dashboardData.error) {
+        alert('Error loading data: ' + dashboardData.error);
+        return;
+      }
+      
       // --- Chart 1: Opportunity Count by Partner Driven & Size (Bar Chart) ---
       const oppCountPartnerSizeCtx = document.getElementById('oppCountPartnerSizeChart').getContext('2d');
-      const partnerDrivenLabels = Object.keys(fakeData.oppCountPartnerSize);
+      const partnerDrivenLabels = Object.keys(dashboardData.oppCountPartnerSize);
       const sizeLabels = ['Small', 'Medium', 'Large'];
 
       const datasetsPartnerSize = sizeLabels.map(size => ({
         label: size,
-        data: partnerDrivenLabels.map(partner => fakeData.oppCountPartnerSize[partner]?.[size] || 0),
+        data: partnerDrivenLabels.map(partner => dashboardData.oppCountPartnerSize[partner]?.[size] || 0),
         backgroundColor: size === 'Small' ? 'rgba(54, 162, 235, 0.7)' : (size === 'Medium' ? 'rgba(255, 206, 86, 0.7)' : 'rgba(75, 192, 192, 0.7)'),
       }));
 
@@ -133,8 +105,8 @@
 
       // --- Chart 2: Opportunity Count by Region (Pie Chart) ---
       const oppCountRegionCtx = document.getElementById('oppCountRegionChart').getContext('2d');
-      const regionLabels = Object.keys(fakeData.oppCountRegion);
-      const regionCounts = regionLabels.map(region => fakeData.oppCountRegion[region]);
+      const regionLabels = Object.keys(dashboardData.oppCountRegion);
+      const regionCounts = regionLabels.map(region => dashboardData.oppCountRegion[region]);
       const regionColors = ['rgba(255, 99, 132, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(255, 206, 86, 0.7)'];
 
       new Chart(oppCountRegionCtx, {
@@ -155,8 +127,8 @@
 
       // --- Chart 3: Revenue by Sales Stage (Bar Chart) ---
       const revenueByStageCtx = document.getElementById('revenueByStageChart').getContext('2d');
-      const stageLabels = Object.keys(fakeData.revenueByStage);
-      const stageRevenue = Object.values(fakeData.revenueByStage);
+      const stageLabels = Object.keys(dashboardData.revenueByStage);
+      const stageRevenue = Object.values(dashboardData.revenueByStage);
       const stageColors = ['rgba(0, 123, 255, 0.7)', 'rgba(108, 117, 125, 0.7)', 'rgba(25, 135, 84, 0.7)', 'rgba(220, 53, 69, 0.7)', 'rgba(13, 110, 253, 0.7)'];
 
       new Chart(revenueByStageCtx, {
@@ -180,13 +152,13 @@
 
       // --- Chart 4: Opportunity Count by Month & Stage (Stacked Bar Chart) ---
       const oppCountMonthStageCtx = document.getElementById('oppCountMonthStageChart').getContext('2d');
-      const monthLabels = Object.keys(fakeData.oppCountMonthStage);
+      const monthLabels = Object.keys(dashboardData.oppCountMonthStage);
       const stageLabelsMonth = ['Lead', 'Quality', 'Solution', 'Proposal', 'Finalize'];
       const stageColorsMonth = ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(153, 102, 255, 0.7)'];
 
       const datasetsMonthStage = stageLabelsMonth.map((stage, index) => ({
         label: stage,
-        data: monthLabels.map(month => fakeData.oppCountMonthStage[month]?.[stage] || 0),
+        data: monthLabels.map(month => dashboardData.oppCountMonthStage[month]?.[stage] || 0),
         backgroundColor: stageColorsMonth[index],
       }));
 
@@ -207,13 +179,13 @@
 
       // --- Chart 5: Average Revenue by Partner & Size (Bar Chart) ---
       const avgRevenuePartnerSizeCtx = document.getElementById('avgRevenuePartnerSizeChart').getContext('2d');
-      const partnerLabelsAvgRev = Object.keys(fakeData.avgRevenuePartnerSize);
+      const partnerLabelsAvgRev = Object.keys(dashboardData.avgRevenuePartnerSize);
       const sizeLabelsAvgRev = ['Small', 'Medium', 'Large'];
       const colorsAvgRev = ['rgba(255, 159, 64, 0.7)', 'rgba(101, 205, 254, 0.7)', 'rgba(144, 238, 144, 0.7)'];
 
       const datasetsAvgRev = sizeLabelsAvgRev.map((size, index) => ({
         label: size,
-        data: partnerLabelsAvgRev.map(partner => fakeData.avgRevenuePartnerSize[partner]?.[size] || 0),
+        data: partnerLabelsAvgRev.map(partner => dashboardData.avgRevenuePartnerSize[partner]?.[size] || 0),
         backgroundColor: colorsAvgRev[index],
       }));
 
@@ -234,8 +206,8 @@
 
       // --- Chart 6: Factored Revenue by Size (Bar Chart) ---
       const factoredRevenueSizeCtx = document.getElementById('factoredRevenueSizeChart').getContext('2d');
-      const sizeLabelsFactoredRev = Object.keys(fakeData.factoredRevenueBySize);
-      const factoredRevenueValues = Object.values(fakeData.factoredRevenueBySize);
+      const sizeLabelsFactoredRev = Object.keys(dashboardData.factoredRevenueBySize);
+      const factoredRevenueValues = Object.values(dashboardData.factoredRevenueBySize);
       const colorsFactoredRev = ['rgba(255, 205, 210, 0.7)', 'rgba(201, 148, 199, 0.7)', 'rgba(121, 134, 203, 0.7)'];
 
       new Chart(factoredRevenueSizeCtx, {
